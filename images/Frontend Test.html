@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost/frontend_shop/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>Frontend Test</title>
+    <!--<script src="js/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>-->
+    <script type="text/javascript" src="./Frontend Test_files/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./Frontend Test_files/angular.min.js"></script><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\:form{display:block;}</style>
+
+    <link rel="stylesheet" href="./Frontend Test_files/style.css">
+    <script src="./Frontend Test_files/ajax.js"></script>
+
+
+</head>
+<body>
+    <headr>Online Shop</headr>
+    <div id="div_container" ng-app="myApp" ng-controller="customersCtrl" class="ng-scope">
+        <div class="left_side"></div>
+        <div class="main_side">
+
+            <div class="fisopa_box">
+                <div class="pagination" rel="30">
+                    <div ng-click="pagination.prevPage()">«</div>
+                    <select ng-change="changePage()" ng-model="selectedPage" ng-init="selectedPage=1" class="ng-pristine ng-valid"><option value="? number:1 ?"></option>
+                        <!-- ngRepeat: n in pagination.pages --><option ng-repeat="n in pagination.pages" ng-selected="n == pagination.currentPage" value="1" class="ng-scope ng-binding" selected="selected">1 von 2</option><option ng-repeat="n in pagination.pages" ng-selected="n == pagination.currentPage" value="2" class="ng-scope ng-binding">2 von 2</option>
+                    </select>
+                    <div ng-click="pagination.nextPage()">»</div>
+                </div>
+                
+                <select class="sort ng-pristine ng-valid" ng-change="OrderByName()" ng-model="order_col" value="Sort">
+                    <option value="">Sort</option>
+                    <option value="name#asc">Name A-Z</option>
+                    <option value="name#desc">Name Z-A</option>
+                    <option value="price#asc">Lowest Price</option>
+                    <option value="price#desc">Highest Price</option>
+                    <option value="rating#desc">Best Rating</option>
+                </select>
+
+
+
+
+    <p>
+        Group by:
+        <a ng-click="groupBy( &#39;brand&#39; )" href="http://localhost/frontend_shop/">brand</a> -
+    </p>
+
+<div id="filter_container" style="top: 138px; left: 435.188px; width: 215px; display: block;">
+    <!-- ngRepeat: group in groups --><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Chloé" type="checkbox">Chloé
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Dior" type="checkbox">Dior
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Dolce &amp; Gabbana" type="checkbox">Dolce &amp; Gabbana
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Emporio Armani" type="checkbox">Emporio Armani
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Giorgio Armani" type="checkbox">Giorgio Armani
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Guerlain" type="checkbox">Guerlain
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Hugo Boss" type="checkbox">Hugo Boss
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Issey Miyake" type="checkbox">Issey Miyake
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Jean Paul Gaultier" type="checkbox">Jean Paul Gaultier
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Lacoste" type="checkbox">Lacoste
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Lancôme" type="checkbox">Lancôme
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Narciso Rodriguez" type="checkbox">Narciso Rodriguez
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Paco Rabanne" type="checkbox">Paco Rabanne
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Viktor &amp; Rolf" type="checkbox">Viktor &amp; Rolf
+    </div><div id="filter" ng-repeat="group in groups" class="ng-scope ng-binding">
+        <input value="Yves Saint Laurent" type="checkbox">Yves Saint Laurent
+    </div>
+    <input type="button" value="Close" style="
+    display:  block;
+    width:  100%;
+    margin-top: 5px;
+">
+</div>
+
+
+
+
+                <div id="filter">
+                     <input type="text" ng-change="ChangeFilter()" ng-model="filter_PName" placeholder="product name" class="ng-pristine ng-valid">
+                    <input id="brand" type="text" ng-change="ChangeFilter()" ng-click="groupBy( &#39;brand&#39; )" ng-model="filter_PBrand" placeholder="product brand" class="ng-pristine ng-valid">
+                    <input type="text" ng-change="ChangeFilter()" ng-model="filter_FromPrice" placeholder="from price" class="ng-pristine ng-valid">
+                    <input type="text" ng-change="ChangeFilter()" ng-model="filter_ToPrice" placeholder="to price" class="ng-pristine ng-valid">
+                </div>
+            </div>
+
+            <!-- ngRepeat: x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage --><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/l/a/lancome-la-vie-est-belle-eau-de-parfum-30-ml.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/lancome-la-vie-est-belle-eau-de-parfum-30-ml.jpg">
+                <strong class="ng-binding">Lancôme La vie est belle Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Lancôme</div>
+                <div class="p_price ng-binding">3895 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/j/e/jean-paul-gaultier-le-male-eau-de-toilette-125-ml-3423470317534.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/jean-paul-gaultier-le-male-eau-de-toilette-125-ml-3423470317534.jpg">
+                <strong class="ng-binding">Jean Paul Gaultier Le Male Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Jean Paul Gaultier</div>
+                <div class="p_price ng-binding">3395 € / 40ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/j/e/jean-paul-gaultier-scandal-eau-de-parfum-80-ml-8435415006408.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/jean-paul-gaultier-scandal-eau-de-parfum-80-ml-8435415006408.jpg">
+                <strong class="ng-binding">Jean Paul Gaultier Scandal Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Jean Paul Gaultier</div>
+                <div class="p_price ng-binding">3895 € / 30ML</div>
+                <div class="p_rating ng-binding">-96%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/p/a/paco-rabanne-one-million-eau-de-toilette-100-ml-3349666007921.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/paco-rabanne-one-million-eau-de-toilette-100-ml-3349666007921.jpg">
+                <strong class="ng-binding">Paco Rabanne 1 Million Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Paco Rabanne</div>
+                <div class="p_price ng-binding">4295 € / 50ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/h/u/hugo-boss-boss-bottled-eau-de-toilette-50-ml-737052351018.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/hugo-boss-boss-bottled-eau-de-toilette-50-ml-737052351018.jpg">
+                <strong class="ng-binding">Hugo Boss Boss Bottled Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Hugo Boss</div>
+                <div class="p_price ng-binding">3795 € / 50ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/p/a/paco-rabanne-invictus-eau-de-toilette-100-ml-3349668515660.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/paco-rabanne-invictus-eau-de-toilette-100-ml-3349668515660.jpg">
+                <strong class="ng-binding">Paco Rabanne Invictus Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Paco Rabanne</div>
+                <div class="p_price ng-binding">4395 € / 50ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/g/i/giorgio-armani-si-eau-de-parfum-50ml_7.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/giorgio-armani-si-eau-de-parfum-50ml_7.jpg">
+                <strong class="ng-binding">Giorgio Armani Sì Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Giorgio Armani</div>
+                <div class="p_price ng-binding">4395 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/p/a/paco-rabanne-olympea-eau-de-parfum-50-ml.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/default.jpeg">
+                <strong class="ng-binding">Paco Rabanne Olympéa Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Paco Rabanne</div>
+                <div class="p_price ng-binding">3780 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/y/v/yves-saint-laurent-black-opium-eau-de-parfum.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/yves-saint-laurent-black-opium-eau-de-parfum.jpg">
+                <strong class="ng-binding">Yves Saint Laurent Black Opium Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Yves Saint Laurent</div>
+                <div class="p_price ng-binding">4895 € / 30ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/p/a/paco-rabanne-lady-million-eau-de-parfum-80-ml-3349668508587.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/paco-rabanne-lady-million-eau-de-parfum-80-ml-3349668508587.jpg">
+                <strong class="ng-binding">Paco Rabanne Lady Million Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Paco Rabanne</div>
+                <div class="p_price ng-binding">3695 € / 30ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/c/h/chloe-chloe-eau-de-parfum-75-ml-3607346232385.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/chloe-chloe-eau-de-parfum-75-ml-3607346232385.jpg">
+                <strong class="ng-binding">Chloé Chloé Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Chloé</div>
+                <div class="p_price ng-binding">3695 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/d/i/dior-sauvage-eau-de-toilette-100-ml.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/dior-sauvage-eau-de-toilette-100-ml.jpg">
+                <strong class="ng-binding">Dior Sauvage Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Dior</div>
+                <div class="p_price ng-binding">5995 € / 60ML</div>
+                <div class="p_rating ng-binding">-97%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/g/u/guerlain-mon-guerlain-eau-de-parfum-50-ml-3346470131392.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/guerlain-mon-guerlain-eau-de-parfum-50-ml-3346470131392.jpg">
+                <strong class="ng-binding">Guerlain Mon Guerlain Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Guerlain</div>
+                <div class="p_price ng-binding">5195 € / 30ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/p/a/paco-rabanne-1-million-prive-eau-de-parfum-50-ml-3349668535484.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/paco-rabanne-1-million-prive-eau-de-parfum-50-ml-3349668535484.jpg">
+                <strong class="ng-binding">Paco Rabanne 1 Million Privé Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Paco Rabanne</div>
+                <div class="p_price ng-binding">4695 € / 50ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/g/i/giorgio-armani-code-homme-eau-de-toilette-125-ml.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/giorgio-armani-code-homme-eau-de-toilette-125-ml.jpg">
+                <strong class="ng-binding">Giorgio Armani Code Homme Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Giorgio Armani</div>
+                <div class="p_price ng-binding">3795 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/g/i/giorgio-armani-code-femme-eau-de-parfum-50-ml.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/giorgio-armani-code-femme-eau-de-parfum-50-ml.jpg">
+                <strong class="ng-binding">Giorgio Armani Code Femme Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Giorgio Armani</div>
+                <div class="p_price ng-binding">3995 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/n/a/narciso-rodriguez-poudree-eau-de-parfum-50-ml.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/narciso-rodriguez-poudree-eau-de-parfum-50-ml.jpg">
+                <strong class="ng-binding">Narciso Rodriguez NARCISO Poudrée Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Narciso Rodriguez</div>
+                <div class="p_price ng-binding">3995 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/h/u/hugo-boss-boss-the-scent-for-her-eau-de-parfum-100-ml-730870196885.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/hugo-boss-boss-the-scent-for-her-eau-de-parfum-100-ml-730870196885.jpg">
+                <strong class="ng-binding">Hugo Boss Boss The Scent for her Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Hugo Boss</div>
+                <div class="p_price ng-binding">4295 € / 30ML</div>
+                <div class="p_rating ng-binding">-96%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/h/u/hugo-boss-boss-the-scent-eau-de-toilette.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/hugo-boss-boss-the-scent-eau-de-toilette.jpg">
+                <strong class="ng-binding">Hugo Boss Boss The Scent Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Hugo Boss</div>
+                <div class="p_price ng-binding">4495 € / 50ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/g/i/giorgio-armani-acqua-di-gio-homme-eau-de-toilette-200-ml-3360372078500.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/giorgio-armani-acqua-di-gio-homme-eau-de-toilette-200-ml-3360372078500.jpg">
+                <strong class="ng-binding">Giorgio Armani Acqua di Giò Homme Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Giorgio Armani</div>
+                <div class="p_price ng-binding">4195 € / 30ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/g/i/giorgio-armani-code-homme-profumo-parfum-30-ml-3614270581649.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/giorgio-armani-code-homme-profumo-parfum-30-ml-3614270581649.jpg">
+                <strong class="ng-binding">Giorgio Armani Code Homme Profumo Parfum</strong>
+                <div class="p_brand ng-binding">Giorgio Armani</div>
+                <div class="p_price ng-binding">4695 € / 30ML</div>
+                <div class="p_rating ng-binding">-96%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/i/s/issey-miyake-l-eau-majeure-d-issey-eau-de-toilette-100-ml-3423474889556.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/issey-miyake-l-eau-majeure-d-issey-eau-de-toilette-100-ml-3423474889556.jpg">
+                <strong class="ng-binding">Issey Miyake L'Eau Majeure D'Issey Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Issey Miyake</div>
+                <div class="p_price ng-binding">4595 € / 50ML</div>
+                <div class="p_rating ng-binding">-100%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/d/o/dolce-and-gabbana-light-blue-eau-de-toilette-50ml_9.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/dolce-and-gabbana-light-blue-eau-de-toilette-50ml_9.jpg">
+                <strong class="ng-binding">Dolce &amp; Gabbana Light Blue Eau de Toilette</strong>
+                <div class="p_brand ng-binding">Dolce &amp; Gabbana</div>
+                <div class="p_price ng-binding">2895 € / 25ML</div>
+                <div class="p_rating ng-binding">-98%</div>
+            </div><div class="p_box ng-scope" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="https://cdn.flaconi.de/media/catalog/215x/l/a/lancome-tresor-eau-de-parfum-100ml_8.jpg" on-error-src="http://localhost/frontend_shop/images/default.jpeg" src="./Frontend Test_files/lancome-tresor-eau-de-parfum-100ml_8.jpg">
+                <strong class="ng-binding">Lancôme Trésor Eau de Parfum</strong>
+                <div class="p_brand ng-binding">Lancôme</div>
+                <div class="p_price ng-binding">2695 € / 30ML</div>
+                <div class="p_rating ng-binding">-99%</div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <footer></footer>
+
+
+
+</body></html>

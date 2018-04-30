@@ -1,0 +1,134 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#div_container{
+    margin: 10px;
+}
+.pagination{
+    display: inline-block;
+}
+.pagination div {
+    cursor: pointer;
+    list-style: none;
+    background-color: #FFFFFF;
+    border: 1px solid #9d9d9d;
+    display: inline-block;
+    text-align: center;
+    padding: 5px 10px;
+    max-width: 15px;
+    max-height: 17px;
+}
+.fisopa_box{
+    margin-bottom: 10PX;
+}
+.fisopa_box input,.fisopa_box select{
+    background-color: #FFFFFF;
+    border: 1px solid #9d9d9d;
+    padding: 2px;
+    padding: 4px;
+    font-size: 15px;
+}
+#filter input{
+    width: 45% !important;
+    box-sizing: border-box;
+    margin-top: 5PX;
+}
+.p_box{
+    position: relative;
+    text-align: center;
+    border: 1px solid transparent;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 2.08333rem;
+    width: 235px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.p_box:hover{
+    border-color: #9d9d9d;
+}
+.p_box img{
+    vertical-align: middle;
+    margin: 0 auto 10px;
+    display: block;
+    max-width: 100% !important;
+    min-height: 251px ;
+}
+.p_brand{
+    color: #737373;
+    margin-bottom: 7px;
+    margin-top: 5px;
+}
+.p_price{
+    color: #83122a;
+    font-weight: 700;
+}
+.p_rating{
+    color: #83122a;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    width: 120px;
+    text-align: left;
+}
+.main_side{
+    /*width: 70%;*/
+    box-sizing: border-box;
+    /*float: right;*/
+}
+.sort{
+    display: inline-block; 
+    max-width: 250px;
+    padding-left: 10px;
+}
+#filter_container{
+    border: 1px solid #9d9d9d;
+    border-top:0px;
+    display: inline-block;
+    font-size: 11px;
+    color: #585858;
+    padding: 5px;
+    position: absolute;
+    z-index: 12;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    display: none;
+}
+#filter_container input[type=button]
+{
+    width: 100%;
+    margin-top: 5px;    
+}
+
+@media screen and (max-width: 480px) {
+    .p_box img{
+        max-width: 100% !important;
+        min-height: 140px !important;
+    }
+    .p_box {
+        width: 100% !important;
+    }
+    #filter input{
+        width: 100% !important;
+    }
+    .sort{
+        width: 100%;
+        margin-top: 5px;
+        padding-left: 0px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .p_box img{
+        max-width: 100% !important;
+        min-height: 158px;
+    }
+    .p_box {
+        width: 50% !important;
+    }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Frontend Test</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/ajax.js"></script>
+
+
+</head>
+<body>
+    <headr>Online Shop</headr>
+    <div id="div_container" ng-app="myApp" ng-controller="customersCtrl">
+        
+        <div class="main_side">
+
+            <div class="fisopa_box">
+                <div class="pagination" rel="{{filteredProducts=products.length}}">
+                    <div ng-click="pagination.prevPage()">&laquo;</div>
+                    <select ng-change="changePage()" ng-model="selectedPage" ng-init="selectedPage=1">
+                        <option ng-repeat="n in pagination.pages" ng-selected="n == pagination.currentPage" value="{{n}}">{{n}} von {{pagination.numPages}}</option>
+                    </select>
+                    <div ng-click="pagination.nextPage()">&raquo;</div>
+                </div>
+                
+                <select class="sort" ng-change="OrderByName()" ng-model="order_col" value="Sort">
+                    <option value="">Sort</option>
+                    <option value="name#asc">Name A-Z</option>
+                    <option value="name#desc">Name Z-A</option>
+                    <option value="price#asc">Lowest Price</option>
+                    <option value="price#desc">Highest Price</option>
+                    <option value="rating#desc">Best Rating</option>
+                </select>
+
+
+
+
+
+                <div id="filter_container">
+                    <div id="filter" ng-repeat="group in groups">
+                        <input value="{{ group }}" type="checkbox" ng-click="toggleSelection($event)">{{ group }}
+                    </div>
+                    <input type="button" value="Close" />
+                </div>
+
+
+
+
+                <div id="filter">
+                     <input type="text" ng-change="ChangeFilter()" ng-model="filter_PName" placeholder="product name">
+                    <input id="brand" type="text" ng-change="ChangeFilter()" ng-click="groupBy( 'brand' )" ng-model="filter_PBrand" placeholder="product brand">
+                    <input type="text" ng-change="ChangeFilter()" ng-model="filter_FromPrice" placeholder="from price">
+                    <input type="text" ng-change="ChangeFilter()" ng-model="filter_ToPrice" placeholder="to price">
+                </div>
+            </div>
+
+            <div class="p_box" ng-repeat="x in products | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+                <img ng-src="{{x.image}}" on-error-src="http://localhost/frontend_shop/images/default.jpeg" />
+                <strong>{{x.name}}</strong>
+                <div class="p_brand">{{x.brand}}</div>
+                <div class="p_price">{{x.price}} € / {{x.size}}</div>
+                <div class="p_rating">-{{x.rating}}%</div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <footer></footer>
+</body>
+</html>
+
